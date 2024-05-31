@@ -29,7 +29,7 @@ public abstract class ToolBar {
 		toolBar.setLayoutData(gridData);
 
 		Hashtable event = new Hashtable();
-		event.put(SqlAdmin.EV_ID_SRC, new Integer(eventSrcType));
+		event.put(SqlAdmin.EV_ID_SRC, eventSrcType);
 		
 		for (int i = 0; i< items.size(); i++) {
 			ToolBarItem item = (ToolBarItem)items.elementAt(i);
@@ -38,7 +38,7 @@ public abstract class ToolBar {
 			if (item.style ==SWT.PUSH){
 				barItem.setImage(GUIUtil.getIcon(item.icon));
 				barItem.setToolTipText(item.tip);
-				event.put(SqlAdmin.EV_ID, new Integer(item.event));
+				event.put(SqlAdmin.EV_ID, item.event);
 				barItem.addSelectionListener(new SelectionHandler(evh, event));
 			}
 		}

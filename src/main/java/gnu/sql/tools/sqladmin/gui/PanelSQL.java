@@ -83,7 +83,7 @@ public class PanelSQL implements IEventHandler {
 			public void keyReleased(KeyEvent e){
 				if (e.keyCode==SWT.F5){
 					Hashtable event = new Hashtable();
-					event.put(EV_ID, new Integer(ToolBarSQL.EV_RUN));
+					event.put(EV_ID, ToolBarSQL.EV_RUN);
 					handleEvent(event);
 				}
 			}

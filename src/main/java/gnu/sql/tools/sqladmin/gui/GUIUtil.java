@@ -7,11 +7,21 @@ import org.eclipse.swt.*;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.swt.graphics.*;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.*;
 
 public class GUIUtil {
 	public static Image getIcon(String name){
-		return new Image(SqlAdmin.display, SqlAdmin.class.getResourceAsStream("images/" + name));
+		try{
+			URL url = SqlAdmin.class.getResource("images/" + name);
+			InputStream resourceAsStream = url.openStream();
+			// InputStream resourceAsStream = SqlAdmin.class.getResourceAsStream("/images/" + name); // TODO
+			return new Image(SqlAdmin.display, resourceAsStream);
+		}catch(Exception exception){
+			System.out.println("ex" + exception.getMessage());
+			return null;
+		}
 	}
 	
 	public static boolean query(String text){
@@ -35,7 +45,7 @@ public class GUIUtil {
 	
 	public static MenuItem cascadeMenuItem(Menu parent, IEventHandler evh, int evId, String text, Hashtable event){
 		MenuItem item = cascadeMenuItem(parent, text);
-		event.put(SqlAdmin.EV_ID,new Integer(evId));
+		event.put(SqlAdmin.EV_ID, evId);
 		item.addSelectionListener(new SelectionHandler(evh, event));
 		return item;
 	}

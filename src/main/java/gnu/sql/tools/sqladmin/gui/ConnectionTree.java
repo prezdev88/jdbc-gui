@@ -25,7 +25,7 @@ public class ConnectionTree {
 		dbItem.setData(SqlAdmin.ID_TYPE,SqlAdmin.ID_TYPE_CONNECTION);
 		dbItem.setData(SqlAdmin.ID_CONNECTION,con);
 		dbItem.setData(SqlAdmin.ID_CONNTREE,this);
-		dbItem.setData(ID_UPDATED,new Boolean(false));
+		dbItem.setData(ID_UPDATED,false);
 		
 		dbItem.setImage(GUIUtil.getIcon("db-off.gif"));
 		new TreeItem(dbItem, SWT.NULL);
@@ -47,7 +47,7 @@ public class ConnectionTree {
 		tableItem.setData(SqlAdmin.ID_SCHEMA, schemaName);
 		tableItem.setData(SqlAdmin.ID_CONNECTION, con);
 		tableItem.setData(SqlAdmin.ID_CONNTREE,this);
-		tableItem.setData(ID_UPDATED,new Boolean(false));
+		tableItem.setData(ID_UPDATED,false);
 		new TreeItem(tableItem, SWT.NULL);
 	}
 	
@@ -55,7 +55,7 @@ public class ConnectionTree {
 		boolean withErrors = false;		
 		Boolean updated = (Boolean)item.getData(ID_UPDATED);
 		if (updated.booleanValue()) return;
-		item.setData(ID_UPDATED,new Boolean(true));
+		item.setData(ID_UPDATED, true);
 		cleanTree(item);
 		try {
 			java.sql.DatabaseMetaData dbmd = con.db.getMetaData();
@@ -78,7 +78,7 @@ public class ConnectionTree {
 	void createTableTree(TreeItem item){
 		Boolean updated = (Boolean)item.getData(ID_UPDATED);
 		if (updated.booleanValue()) return;
-		item.setData(ID_UPDATED,new Boolean(true));
+		item.setData(ID_UPDATED, true);
 		cleanTree(item);
 		try {
 			java.sql.DatabaseMetaData dbmd = con.db.getMetaData();
@@ -103,7 +103,7 @@ public class ConnectionTree {
 	public void createConnectedTree(TreeItem item){
 		Boolean updated = (Boolean)item.getData(ID_UPDATED);
 		if (updated.booleanValue()) return;
-		item.setData(ID_UPDATED,new Boolean(true));
+		item.setData(ID_UPDATED, true);
 		con.disconnect();
 		if (!con.connect()) {
 			setBrokenConnection(item);
@@ -135,7 +135,7 @@ public class ConnectionTree {
 							schemaItem.setData(SqlAdmin.ID_TYPE, SqlAdmin.ID_TYPE_SCHEMA);
 							schemaItem.setData(SqlAdmin.ID_CONNECTION, con);
 							schemaItem.setData(SqlAdmin.ID_CONNTREE,this);
-							schemaItem.setData(ID_UPDATED,new Boolean(false));
+							schemaItem.setData(ID_UPDATED, false);
 							new TreeItem(schemaItem, SWT.NULL);
 						}
 					} while (schemas.next());
